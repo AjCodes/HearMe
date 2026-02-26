@@ -3,300 +3,400 @@
         "id": "s1",
         "name": "APT.",
         "artist": "ROSÉ & Bruno Mars",
-        "color": "#f4a0b8"
+        "color": "#f4a0b8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/258e6042338ce64bb4157c0c94b232ac/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/0/e/0/0/0e093da717796aa9d2dbe0d189cfba66.mp3?hdnea=exp=1772141766~acl=/api/1/1/0/e/0/0/0e093da717796aa9d2dbe0d189cfba66.mp3*~data=user_id=0,application_id=42~hmac=f5ccb6af0030dcc512424dda319e497a0683440d202fead84f4d4bfa3d79706a"
     },
     {
         "id": "s2",
         "name": "Die With A Smile",
         "artist": "Lady Gaga & Bruno Mars",
-        "color": "#c8b2f4"
+        "color": "#c8b2f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/4bd5903f4ce8f2601916bfadb44efe8a/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/4/5/9/0/459c235b39ef8badd04c5ef181f58c24.mp3?hdnea=exp=1772141767~acl=/api/1/1/4/5/9/0/459c235b39ef8badd04c5ef181f58c24.mp3*~data=user_id=0,application_id=42~hmac=b935be299814b4f18b00870cd7572e63c1e6ddb65b7ee64dba64198429b45822"
     },
     {
         "id": "s3",
         "name": "Birds of a Feather",
         "artist": "Billie Eilish",
-        "color": "#a0d4f4"
+        "color": "#a0d4f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/5d284b31cb9ddeb1a0c79aede5a94e1c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/5/e/0/0/5e0fb99f6f1e0f18ab70a4c0d18efa5c.mp3?hdnea=exp=1772141767~acl=/api/1/1/5/e/0/0/5e0fb99f6f1e0f18ab70a4c0d18efa5c.mp3*~data=user_id=0,application_id=42~hmac=775321295674769e8a2a39ede68b8dae272fc441f762b5f856cfd8c85f808418"
     },
     {
         "id": "s4",
         "name": "Espresso",
         "artist": "Sabrina Carpenter",
-        "color": "#d4a474"
+        "color": "#d4a474",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/e3221287a77eb262944e6528766eeba4/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/1/7/a/0/17a21c40ce4af3ac9514aac756403188.mp3?hdnea=exp=1772141768~acl=/api/1/1/1/7/a/0/17a21c40ce4af3ac9514aac756403188.mp3*~data=user_id=0,application_id=42~hmac=fd328185bdbe95f9216047dea3ff55f2c5ca695fc7c76783eb1dbce215513f7c"
     },
     {
         "id": "s5",
         "name": "A Bar Song (Tipsy)",
         "artist": "Shaboozey",
-        "color": "#e8c890"
+        "color": "#e8c890",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/d4f0d9289d6f68204dee8a22fe777c70/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/e/5/c/0/e5c9f000eecf7738ff4e3a4e4e9f42b8.mp3?hdnea=exp=1772141768~acl=/api/1/1/e/5/c/0/e5c9f000eecf7738ff4e3a4e4e9f42b8.mp3*~data=user_id=0,application_id=42~hmac=0e81743ecf60f1fbe4b5d73bcbb28efb05663e16c1c9a1b0c0a5a684150413f6"
     },
     {
         "id": "s6",
         "name": "Not Like Us",
         "artist": "Kendrick Lamar",
-        "color": "#a0a0b4"
+        "color": "#a0a0b4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/84345d29bc2ed8e713112425f8417e97/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/4/9/0/0/490577bad3aa52043078917ac1cedf60.mp3?hdnea=exp=1772141769~acl=/api/1/1/4/9/0/0/490577bad3aa52043078917ac1cedf60.mp3*~data=user_id=0,application_id=42~hmac=c94b0d523eb257b9e087a3d41f88917df15b71d691f70dd6515ed1f7332bba74"
     },
     {
         "id": "s7",
         "name": "Taste",
         "artist": "Sabrina Carpenter",
-        "color": "#f4c0a0"
+        "color": "#f4c0a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/0fd6e3b346b959a8781ccfa89b63607a/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/8/1/3/0/813c2b264c2898a448de65eb10e2e1a2.mp3?hdnea=exp=1772141769~acl=/api/1/1/8/1/3/0/813c2b264c2898a448de65eb10e2e1a2.mp3*~data=user_id=0,application_id=42~hmac=00d94bb5ae5743a7b2f797a67f849517e85dafcaaff31d64b5ac66f378472123"
     },
     {
         "id": "s8",
         "name": "LUNCH",
         "artist": "Billie Eilish",
-        "color": "#a0c8a0"
+        "color": "#a0c8a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/5d284b31cb9ddeb1a0c79aede5a94e1c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/6/4/7/0/64794bd2d788edb12e44b11e09548d10.mp3?hdnea=exp=1772141769~acl=/api/1/1/6/4/7/0/64794bd2d788edb12e44b11e09548d10.mp3*~data=user_id=0,application_id=42~hmac=16fde79ada682dc1f4d658e0decf4ac845d42a9aa8640649914a738f7843f65e"
     },
     {
         "id": "s9",
         "name": "Please Please Please",
         "artist": "Sabrina Carpenter",
-        "color": "#f0c890"
+        "color": "#f0c890",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/0fd6e3b346b959a8781ccfa89b63607a/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/6/8/a/0/68a841cd6df6a619d8b7cd1b2622391b.mp3?hdnea=exp=1772141770~acl=/api/1/1/6/8/a/0/68a841cd6df6a619d8b7cd1b2622391b.mp3*~data=user_id=0,application_id=42~hmac=9521fd1a1f7793eb2961e4c1983428524ffc5a8a8d9ce6466f6e69fe9ae34597"
     },
     {
         "id": "s10",
         "name": "Texas Hold 'Em",
         "artist": "Beyoncé",
-        "color": "#e0c890"
+        "color": "#e0c890",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/e50407841497a26457036110eab49f1b/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/0/8/8/0/0885b31006caf52814a00ddfa612e998.mp3?hdnea=exp=1772141770~acl=/api/1/1/0/8/8/0/0885b31006caf52814a00ddfa612e998.mp3*~data=user_id=0,application_id=42~hmac=c92a4c914489b167953fed4649be30e955d3ebbc7391ad8ccc6d534631de2de4"
     },
     {
         "id": "s11",
         "name": "Lose Control",
         "artist": "Teddy Swims",
-        "color": "#c8c8f4"
+        "color": "#c8c8f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/fb2f549900acdfaefeee8c718e42037b/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/b/a/c/0/bac060c52788568fc01f5a1f5574b148.mp3?hdnea=exp=1772141771~acl=/api/1/1/b/a/c/0/bac060c52788568fc01f5a1f5574b148.mp3*~data=user_id=0,application_id=42~hmac=e933f91ef0da1cb1833d6a5c287c9977f92bfe3e64d7fb226f96774e09fb5c90"
     },
     {
         "id": "s12",
         "name": "Good Luck, Babe!",
         "artist": "Chappell Roan",
-        "color": "#f490b8"
+        "color": "#f490b8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/377470fb0413c43587769a7dea37f691/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/c/c/7/0/cc78d370bc3fb2028ac03eb1e18e7022.mp3?hdnea=exp=1772141771~acl=/api/1/1/c/c/7/0/cc78d370bc3fb2028ac03eb1e18e7022.mp3*~data=user_id=0,application_id=42~hmac=27a9c7e13bc97a5f3c00c018e0cb5c3183ae153bc4dc4a9df0e9b66b971a7e93"
     },
     {
         "id": "s13",
         "name": "Beautiful Things",
         "artist": "Benson Boone",
-        "color": "#b2c8f4"
+        "color": "#b2c8f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/ab1ae3011977aa3c7f0a5f025a99cac9/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/1/4/7/0/1473eec25d81e5a9eaa41c63bf9242b1.mp3?hdnea=exp=1772141771~acl=/api/1/1/1/4/7/0/1473eec25d81e5a9eaa41c63bf9242b1.mp3*~data=user_id=0,application_id=42~hmac=68dfb3ed81e013100761defa7d7a20ed140fc2a2d1e4be347932fd5de81fae5b"
     },
     {
         "id": "s14",
         "name": "HOT TO GO!",
         "artist": "Chappell Roan",
-        "color": "#e87040"
+        "color": "#e87040",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/71486ce8b24f612c4887efa0f79a9f66/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/b/a/6/0/ba6a58eae0cd5a7342ed42755eb47c6f.mp3?hdnea=exp=1772141772~acl=/api/1/1/b/a/6/0/ba6a58eae0cd5a7342ed42755eb47c6f.mp3*~data=user_id=0,application_id=42~hmac=a9e4ea68cce099251a170836c50e8f60ab9bb11f0f7d8b8c2346dbe9b70eff6f"
     },
     {
         "id": "s15",
         "name": "I Love You, I'm Sorry",
         "artist": "Gracie Abrams",
-        "color": "#d4b8f0"
+        "color": "#d4b8f0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/bad43fd5d83235591fbcb0132c5f1a35/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/5/a/f/0/5af775f84a2ed9b659eae4f122349094.mp3?hdnea=exp=1772141772~acl=/api/1/1/5/a/f/0/5af775f84a2ed9b659eae4f122349094.mp3*~data=user_id=0,application_id=42~hmac=6a101eb16375734d0732fe80f474bd715234ed3b07109148179b6cecb7b253c4"
     },
     {
         "id": "s16",
         "name": "Too Sweet",
         "artist": "Hozier",
-        "color": "#f4e870"
+        "color": "#f4e870",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/7a7c512b717a4aa7452f3c3e46675322/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/a/c/4/0/ac4097bdcb716e55282570ca08c09b58.mp3?hdnea=exp=1772141773~acl=/api/1/1/a/c/4/0/ac4097bdcb716e55282570ca08c09b58.mp3*~data=user_id=0,application_id=42~hmac=6b1d5ca26dd7496b92e81e18c0dd2f74e7c49497cf6258216ff224befee52405"
     },
     {
         "id": "s17",
         "name": "Stargazing",
         "artist": "Myles Smith",
-        "color": "#4060a0"
+        "color": "#4060a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/49a829eff545c18e26a4314eff9c0414/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/5/3/b/0/53b080b7cc52b2376bac4e860f748dfe.mp3?hdnea=exp=1772141773~acl=/api/1/1/5/3/b/0/53b080b7cc52b2376bac4e860f748dfe.mp3*~data=user_id=0,application_id=42~hmac=1c4216c01d46c3bfe3ca961c3c44c13c7997126517b917637b0bb55247d8392b"
     },
     {
         "id": "s18",
         "name": "Nasty",
         "artist": "Tinashe",
-        "color": "#8860b0"
+        "color": "#8860b0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/a675b3efdcab48cceb055b4256b1a633/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/a/c/f/0/acf53e4df4b6758382b00a66c9a6a3c9.mp3?hdnea=exp=1772141773~acl=/api/1/1/a/c/f/0/acf53e4df4b6758382b00a66c9a6a3c9.mp3*~data=user_id=0,application_id=42~hmac=77293afd75ed974142992debca65aecfe8d006bffda5e6384d19eb25486f51f9"
     },
     {
         "id": "s19",
         "name": "Saturn",
         "artist": "SZA",
-        "color": "#b0b0d8"
+        "color": "#b0b0d8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/24965bc58fb4d1524b5615f9295c802c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/c/3/8/0/c3897b30f483f01d08a89b456ead0600.mp3?hdnea=exp=1772141774~acl=/api/1/1/c/3/8/0/c3897b30f483f01d08a89b456ead0600.mp3*~data=user_id=0,application_id=42~hmac=37446adbb6922a0755fde7a82ff127eac33a526dd8b1857585f630000cc6ae1a"
     },
     {
         "id": "s20",
         "name": "Water",
         "artist": "Tyla",
-        "color": "#9ecbf4"
+        "color": "#9ecbf4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/b246276eba02e22c9e08605924395480/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/9/2/d/0/92d040051d727697621445212b6f69c8.mp3?hdnea=exp=1772141774~acl=/api/1/1/9/2/d/0/92d040051d727697621445212b6f69c8.mp3*~data=user_id=0,application_id=42~hmac=8749acbf1012c51a2570c31f2120da7f4c638a01b6b615c7c7e6a20d2a3b84dd"
     },
     {
         "id": "s21",
         "name": "Stick Season",
         "artist": "Noah Kahan",
-        "color": "#a07050"
+        "color": "#a07050",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/1cf9edd5673e4f9a070054fbd6166134/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/d/8/d/0/d8df01eb0dd908964629c331f1213644.mp3?hdnea=exp=1772141775~acl=/api/1/1/d/8/d/0/d8df01eb0dd908964629c331f1213644.mp3*~data=user_id=0,application_id=42~hmac=920c8be1329b947656adaf7d024196e63c91e057b415a2ba1593c0dbec4d909d"
     },
     {
         "id": "s22",
         "name": "Paint The Town Red",
         "artist": "Doja Cat",
-        "color": "#e06060"
+        "color": "#e06060",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/ad4bfc2a374741218dd6498d04e323cc/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/4/b/9/0/4b956579219fee125efbcc04ec827c04.mp3?hdnea=exp=1772141775~acl=/api/1/1/4/b/9/0/4b956579219fee125efbcc04ec827c04.mp3*~data=user_id=0,application_id=42~hmac=fbe54f134296156515663bb45c846437c400bd3aeed8f8bb146edf5cacb418de"
     },
     {
         "id": "s23",
         "name": "Carnival",
         "artist": "¥$, Kanye West, Ty Dolla $ign",
-        "color": "#f47070"
+        "color": "#f47070",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/a/5/b/0/a5b353694ccc6d0f5cf37c4c7613d529.mp3?hdnea=exp=1772141775~acl=/api/1/1/a/5/b/0/a5b353694ccc6d0f5cf37c4c7613d529.mp3*~data=user_id=0,application_id=42~hmac=1bdae4fe26cdacad71353f5e317bfd28ce6474863029248082f5e056f3a6f2cf"
     },
     {
         "id": "s24",
         "name": "Snooze",
         "artist": "SZA",
-        "color": "#7878a8"
+        "color": "#7878a8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/a3c3b409f0d5bd781821ec0fd79d5b15/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/f/5/a/0/f5a928f019e0f9986a0e728d9312e83d.mp3?hdnea=exp=1772141776~acl=/api/1/1/f/5/a/0/f5a928f019e0f9986a0e728d9312e83d.mp3*~data=user_id=0,application_id=42~hmac=cbf552231770b36dfd71d31f06488ee33f1bfa345315654475ceca2c559ec3db"
     },
     {
         "id": "s25",
         "name": "Greedy",
         "artist": "Tate McRae",
-        "color": "#f4a870"
+        "color": "#f4a870",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/ef25b6bec265332a059879f45d33cd7e/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/b/2/c/0/b2c0972841d7abdb3856b996dc864a8e.mp3?hdnea=exp=1772141776~acl=/api/1/1/b/2/c/0/b2c0972841d7abdb3856b996dc864a8e.mp3*~data=user_id=0,application_id=42~hmac=80fb78e98e32b63b47280167728dfd7a5777b784b31ccbb67bcffe4af2b14083"
     },
     {
         "id": "s26",
         "name": "Levii's Jeans",
         "artist": "Beyoncé ft. Post Malone",
-        "color": "#6090c0"
+        "color": "#6090c0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/e4a77ce7d6781682afb716d21c0a6e3b/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/6/a/d/0/6ad19096b82f611496b7f7cd4bc919ed.mp3?hdnea=exp=1772141777~acl=/api/1/1/6/a/d/0/6ad19096b82f611496b7f7cd4bc919ed.mp3*~data=user_id=0,application_id=42~hmac=e3890fde4a7376c9b97b1c05f1c739b89b49c730823a0204a92eef35d5c28db4"
     },
     {
         "id": "s27",
         "name": "Houdini",
         "artist": "Dua Lipa",
-        "color": "#e0a0f4"
+        "color": "#e0a0f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/12c05200e9097af48e0ad4fc259cee25/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/3/6/7/0/367e45ecbf07a341e248b400f51fc544.mp3?hdnea=exp=1772141777~acl=/api/1/1/3/6/7/0/367e45ecbf07a341e248b400f51fc544.mp3*~data=user_id=0,application_id=42~hmac=7d47c3dbe52856584699e2445a33d1658d2026a268b8f109291dbd66316d08f2"
     },
     {
         "id": "s28",
         "name": "Illusion",
         "artist": "Dua Lipa",
-        "color": "#50b090"
+        "color": "#50b090",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/7dee41c61553d7cd71cd9532937780c0/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/b/2/b/0/b2b0591544d22b131e2b02ae73bc08ff.mp3?hdnea=exp=1772141777~acl=/api/1/1/b/2/b/0/b2b0591544d22b131e2b02ae73bc08ff.mp3*~data=user_id=0,application_id=42~hmac=bcd08574fe43029671f5080defa2172e4cd478c740aa4efce4eb73c2c1fff17d"
     },
     {
         "id": "s29",
         "name": "365",
         "artist": "Charli XCX",
-        "color": "#60d0a0"
+        "color": "#60d0a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/de9e79511cda59914de9add50946e43c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/2/a/2/0/2a2937c5c088cd18c7e7cb062ea0494c.mp3?hdnea=exp=1772141778~acl=/api/1/1/2/a/2/0/2a2937c5c088cd18c7e7cb062ea0494c.mp3*~data=user_id=0,application_id=42~hmac=5724865f97e54442750c115f80e844185849e50f3fac0b899293838efc2ca24f"
     },
     {
         "id": "s30",
         "name": "WILDFLOWER",
         "artist": "Billie Eilish",
-        "color": "#d0e880"
+        "color": "#d0e880",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/5d284b31cb9ddeb1a0c79aede5a94e1c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/a/b/6/0/ab6f382533bd12e8905a8141ceaed4e8.mp3?hdnea=exp=1772141778~acl=/api/1/1/a/b/6/0/ab6f382533bd12e8905a8141ceaed4e8.mp3*~data=user_id=0,application_id=42~hmac=2f8dbcd7220318ec1e8a1acc9e7f4a6a7b50845184943bfe7d3f187c47363f07"
     },
     {
         "id": "s31",
         "name": "Fortnight",
         "artist": "Taylor Swift ft. Post Malone",
-        "color": "#c0c8d8"
+        "color": "#c0c8d8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/73bee9f48378d4c95139e693fd997569/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/f/c/2/0/fc2e000c7c125102fc326023834bcbd9.mp3?hdnea=exp=1772141779~acl=/api/1/1/f/c/2/0/fc2e000c7c125102fc326023834bcbd9.mp3*~data=user_id=0,application_id=42~hmac=56e0ac4d1816915af4d33cf17d507171d6a72252851deaf8c29b95ee10838b09"
     },
     {
         "id": "s32",
         "name": "Cruel Summer",
         "artist": "Taylor Swift",
-        "color": "#f4e0a0"
+        "color": "#f4e0a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/6111c5ab9729c8eac47883e4e50e9cf8/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/c/d/2/0/cd2322270b4d6a7f34448c642123b257.mp3?hdnea=exp=1772141779~acl=/api/1/1/c/d/2/0/cd2322270b4d6a7f34448c642123b257.mp3*~data=user_id=0,application_id=42~hmac=03e03a7cbf230dddcfe8b78a005a20820b8edd560006c968583a375df16287ae"
     },
     {
         "id": "s33",
         "name": "End of Beginning",
         "artist": "Djo",
-        "color": "#80c080"
+        "color": "#80c080",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/f13749b2a226afa7f5f866ce2f4d3015/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/8/d/3/0/8d3e2d737a96e28902c7edca8b18e1f7.mp3?hdnea=exp=1772141779~acl=/api/1/1/8/d/3/0/8d3e2d737a96e28902c7edca8b18e1f7.mp3*~data=user_id=0,application_id=42~hmac=68dada94e0633edabfcdf9e1fa6a77764146681543bba7044cffb602d156fa0b"
     },
     {
         "id": "s34",
         "name": "Lovin On Me",
         "artist": "Jack Harlow",
-        "color": "#d8a0a0"
+        "color": "#d8a0a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/6d4d4cbd4990a644a184b5f64ee01ebf/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/4/2/3/0/4239b2d09c26e6efbb05bf101d8fe8ea.mp3?hdnea=exp=1772141780~acl=/api/1/1/4/2/3/0/4239b2d09c26e6efbb05bf101d8fe8ea.mp3*~data=user_id=0,application_id=42~hmac=e010033cbe51f8aa822a7e1e61a024481b2120863060655c78701c90a6dd0024"
     },
     {
         "id": "s35",
         "name": "Agora Hills",
         "artist": "Doja Cat",
-        "color": "#e8d060"
+        "color": "#e8d060",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/aea5d295972a673a994d88a82fb8e83c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/7/2/3/0/72356d984686a087ac76215a95add430.mp3?hdnea=exp=1772141780~acl=/api/1/1/7/2/3/0/72356d984686a087ac76215a95add430.mp3*~data=user_id=0,application_id=42~hmac=771ea7c8e6523b40412b677c61952858b23cacf58d7b92b4df2a7a07e21aafa1"
     },
     {
         "id": "s36",
         "name": "Obsessed",
         "artist": "Addison Rae",
-        "color": "#f4b8c8"
+        "color": "#f4b8c8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/9a3092e1c8c22c08c6313d8e52ad9586/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/9/f/c/0/9fc9e05ef84e3ff75484287804992632.mp3?hdnea=exp=1772141781~acl=/api/1/1/9/f/c/0/9fc9e05ef84e3ff75484287804992632.mp3*~data=user_id=0,application_id=42~hmac=4b98e9f50ba00f479ba2193fbb17bab30661088add448cc8e9e4918f19bdc84f"
     },
     {
         "id": "s37",
         "name": "Si Antes Te Hubiera Conocido",
         "artist": "KAROL G",
-        "color": "#b0d8e8"
+        "color": "#b0d8e8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/8d2d13e0170f7eccc31f6b1038a870d5/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/4/4/9/0/449439df1ef7bf86774b8f8bf174a566.mp3?hdnea=exp=1772141781~acl=/api/1/1/4/4/9/0/449439df1ef7bf86774b8f8bf174a566.mp3*~data=user_id=0,application_id=42~hmac=a3826d53b3fa3eb410817ac63878da5972f33e32ec75f13d99c3afd2439415b1"
     },
     {
         "id": "s38",
         "name": "MILLION DOLLAR BABY",
         "artist": "Tommy Richman",
-        "color": "#a0f4e8"
+        "color": "#a0f4e8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/26989b6704a8656f2ceb4e3a148a55cd/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/f/a/f/0/faf8bba2b0cb5e327adb09f4a98aabd4.mp3?hdnea=exp=1772141781~acl=/api/1/1/f/a/f/0/faf8bba2b0cb5e327adb09f4a98aabd4.mp3*~data=user_id=0,application_id=42~hmac=c253cc2e8e09d267ada2ca03b3032605168307c0bfc1e8eaabf13760f51bace6"
     },
     {
         "id": "s39",
         "name": "Wanna Be",
         "artist": "GloRilla & Megan Thee Stallion",
-        "color": "#f4f4a0"
+        "color": "#f4f4a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/375abcb47d2aa515c60a0a27ba40fb6d/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/2/b/b/0/2bb807ed34f5458fcb8edf4e1e1ef8ab.mp3?hdnea=exp=1772141782~acl=/api/1/1/2/b/b/0/2bb807ed34f5458fcb8edf4e1e1ef8ab.mp3*~data=user_id=0,application_id=42~hmac=9a4fb3251d3a8ef2761c51491808ec6c49357af0bd1b30eb750c7d30a620ae1e"
     },
     {
         "id": "s40",
         "name": "Risk",
         "artist": "Gracie Abrams",
-        "color": "#c0a0f4"
+        "color": "#c0a0f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/bad43fd5d83235591fbcb0132c5f1a35/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/b/1/b/0/b1b6022d179b9de95fbd243cde1b5297.mp3?hdnea=exp=1772141782~acl=/api/1/1/b/1/b/0/b1b6022d179b9de95fbd243cde1b5297.mp3*~data=user_id=0,application_id=42~hmac=97346c5f6d552ac2ef02274f1ac2504db73b60b3694acd7433761a006bae7695"
     },
     {
         "id": "s41",
         "name": "Pink Pony Club",
         "artist": "Chappell Roan",
-        "color": "#f4a0a0"
+        "color": "#f4a0a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/71486ce8b24f612c4887efa0f79a9f66/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/c/c/7/0/cc7db99ce3da9b69b637da91d28f6039.mp3?hdnea=exp=1772141782~acl=/api/1/1/c/c/7/0/cc7db99ce3da9b69b637da91d28f6039.mp3*~data=user_id=0,application_id=42~hmac=98c0cb4b12cd3f2e2b17098182a7f3067ef3d8f2ba2631a4d2632ceb6eecc1cc"
     },
     {
         "id": "s42",
         "name": "All Falls Down",
         "artist": "Kanye West",
-        "color": "#b0906a"
+        "color": "#b0906a",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/1/9/2/0/192c3a31f08d0d81710bef0d6dff7ea5.mp3?hdnea=exp=1772141783~acl=/api/1/1/1/9/2/0/192c3a31f08d0d81710bef0d6dff7ea5.mp3*~data=user_id=0,application_id=42~hmac=815229e8c2821e5f63589e067615693b6d1f5a637d2f294b41757aac686e611d"
     },
     {
         "id": "s43",
         "name": "Luther",
         "artist": "Kendrick Lamar ft. SZA",
-        "color": "#9898c8"
+        "color": "#9898c8",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/82db4c0f8e9412cafb1cd765b076d58c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/2/6/b/0/26b2e6342d760a15e4c87ee5adee1d17.mp3?hdnea=exp=1772141783~acl=/api/1/1/2/6/b/0/26b2e6342d760a15e4c87ee5adee1d17.mp3*~data=user_id=0,application_id=42~hmac=0a28befc2a7139ae8d94939b90d77d54ef819d424560ce5bf18e5ce86e9653ce"
     },
     {
         "id": "s44",
         "name": "Timeless",
         "artist": "The Weeknd & Playboi Carti",
-        "color": "#2a2a6a"
+        "color": "#2a2a6a",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/07d837e8865ce86684a86fb79ccece96/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/d/1/d/0/d1d0f32d011c2139bcff3bf9b591cf67.mp3?hdnea=exp=1772141784~acl=/api/1/1/d/1/d/0/d1d0f32d011c2139bcff3bf9b591cf67.mp3*~data=user_id=0,application_id=42~hmac=2ce608071deed5cea31d6c19ad5fb69a8967f35c1c7bd87ab1f497ebd02dcf4d"
     },
     {
         "id": "s45",
         "name": "Sympathy Is A Knife",
         "artist": "Charli XCX",
-        "color": "#70b8a0"
+        "color": "#70b8a0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/de9e79511cda59914de9add50946e43c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/5/d/9/0/5d9ac003a4b42c62b46cf9af1d100b14.mp3?hdnea=exp=1772141784~acl=/api/1/1/5/d/9/0/5d9ac003a4b42c62b46cf9af1d100b14.mp3*~data=user_id=0,application_id=42~hmac=786e7ed565e74b27adc806a323530e064f45645f15c7ba4d1ed643566b0f1152"
     },
     {
         "id": "s46",
         "name": "Von Dutch",
         "artist": "Charli XCX",
-        "color": "#a08890"
+        "color": "#a08890",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/de9e79511cda59914de9add50946e43c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/5/7/a/0/57adc1a4c05fa745f9939adcc9c892b2.mp3?hdnea=exp=1772141785~acl=/api/1/1/5/7/a/0/57adc1a4c05fa745f9939adcc9c892b2.mp3*~data=user_id=0,application_id=42~hmac=db356aa64e2db6b9edae4718df2dd03ad8360146fd0446515f30bbba019485ac"
     },
     {
         "id": "s47",
         "name": "Ferrari",
         "artist": "Bebe Rexha",
-        "color": "#e06060"
+        "color": "#e06060",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/93df12633104eb53d68c82981d150270/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/d/d/8/0/dd83d53dffaf1d91f4e57cb59c3a0fb5.mp3?hdnea=exp=1772141785~acl=/api/1/1/d/d/8/0/dd83d53dffaf1d91f4e57cb59c3a0fb5.mp3*~data=user_id=0,application_id=42~hmac=87461fa7ae06566202234ee1ce8c0127e6dcb79f7d218e6069f22d7160ad68cd"
     },
     {
         "id": "s48",
         "name": "Deli",
         "artist": "Ice Spice",
-        "color": "#d48040"
+        "color": "#d48040",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/3a03b684b64d0d27679b044570debb24/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/f/b/f/0/fbf09197b48e225f31cf6fb295561bce.mp3?hdnea=exp=1772141785~acl=/api/1/1/f/b/f/0/fbf09197b48e225f31cf6fb295561bce.mp3*~data=user_id=0,application_id=42~hmac=32300dc83a31fbbca2a931d3091adde69f0b87d64d1c701ff5112e8a037c67cc"
     },
     {
         "id": "s49",
         "name": "Gata Only",
         "artist": "FloyyMenor & Cris MJ",
-        "color": "#4080c0"
+        "color": "#4080c0",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/2b637eeb2dadc47f968313f017d2546c/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/8/6/7/0/86748734ecd3254461e062cededb86b5.mp3?hdnea=exp=1772141786~acl=/api/1/1/8/6/7/0/86748734ecd3254461e062cededb86b5.mp3*~data=user_id=0,application_id=42~hmac=02c744355c79e26490aba46760b67a97bc85f15e3127488c7232ec3a872020cb"
     },
     {
         "id": "s50",
         "name": "Standing Next To You",
         "artist": "Jung Kook",
-        "color": "#e0e8f4"
+        "color": "#e0e8f4",
+        "cover": "https://cdn-images.dzcdn.net/images/cover/5d316d47d96b7c8f5a029dffe1f38981/250x250-000000-80-0-0.jpg",
+        "preview": "https://cdnt-preview.dzcdn.net/api/1/1/3/5/a/0/35afe40a67403470fb221f63c513aac8.mp3?hdnea=exp=1772141786~acl=/api/1/1/3/5/a/0/35afe40a67403470fb221f63c513aac8.mp3*~data=user_id=0,application_id=42~hmac=e55014d51e99392d9ed4432fdc2e3772eebf14bafd47d38debbaf03209ea887f"
     }
 ]

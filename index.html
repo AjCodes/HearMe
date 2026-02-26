@@ -106,10 +106,27 @@
                     <div class="playlist-spines" id="playlist-spines">
                         <!-- Spines rendered by JS -->
                     </div>
+
+                    <!-- Shelf objects sitting on the shelf surface, next to the radio -->
+                    <div class="shelf-objects-display" id="shelf-objects-display">
+                        <!-- Large objects rendered by JS -->
+                    </div>
                 </div>
+
                 <div class="shelf-plank"></div>
-                <div class="shelf-bottom-bay"></div>
+                <div class="shelf-bottom-bay" id="shelf-bottom-bay"></div>
             </div>
+        </div>
+
+        <!-- Poster image area (below profile frame) -->
+        <div class="poster-area" id="poster-area">
+            <span>🖼️ Upload Poster</span>
+        </div>
+        <input type="file" id="poster-input" accept="image/*" hidden />
+
+        <!-- Draggable stickers on the room (rendered by JS) -->
+        <div class="stickers-canvas" id="stickers-canvas">
+            <!-- Stickers positioned absolutely via JS -->
         </div>
 
     </section>
@@ -191,6 +208,12 @@
             <p class="or-text">or<br>Upload a background image</p>
             <label class="upload-area" for="bg-image-input" title="Upload background image">☁️</label>
             <input type="file" id="bg-image-input" accept="image/*" hidden />
+
+            <p class="customizer-section-title">⭐ Stickers (drag them on the room!)</p>
+            <div class="decoration-picker-grid" id="sticker-picker-grid">
+                <!-- Rendered by JS -->
+            </div>
+
             <button class="btn-next" data-nav="room" style="position:static; margin-top:1rem;">← Back to Room</button>
         </div>
     </section>
@@ -241,10 +264,33 @@
             <h2>Customize your shelf</h2>
             <div class="radio-color-customizer">
                 <div class="color-option">
-                    <label for="shelf-color-main">📚 Main Wood</label>
+                    <label for="shelf-color-main">Main Wood</label>
                     <input type="color" id="shelf-color-main" value="#b5813b" />
                 </div>
+                <div class="color-option">
+                    <label for="shelf-color-interior">Interior</label>
+                    <input type="color" id="shelf-color-interior" value="#c9a96e" />
+                </div>
+                <div class="color-option">
+                    <label for="shelf-color-outline">Outline</label>
+                    <input type="color" id="shelf-color-outline" value="#8a5e22" />
+                </div>
+                <div class="color-option">
+                    <label for="shelf-color-plank">Middle Plank</label>
+                    <input type="color" id="shelf-color-plank" value="#8a5e22" />
+                </div>
             </div>
+
+            <p class="customizer-section-title">🪵 Wood Presets</p>
+            <div class="preset-row" id="shelf-presets">
+                <!-- Rendered by JS -->
+            </div>
+
+            <p class="customizer-section-title">🎭 Shelf Objects</p>
+            <div class="shelf-object-grid" id="shelf-object-grid">
+                <!-- Rendered by JS -->
+            </div>
+
             <button class="btn-next" data-nav="room" style="position:static; margin-top:1.5rem;">← Back to Room</button>
         </div>
     </section>

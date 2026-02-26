@@ -88,12 +88,52 @@ export function setShelfColor(color) {
     state.shelfColor = color;
 }
 
+export function setShelfInterior(color) {
+    state.shelfInterior = color;
+}
+
+export function setShelfOutline(color) {
+    state.shelfOutline = color;
+}
+
+export function setShelfPlank(color) {
+    state.shelfPlank = color;
+}
+
+export function toggleShelfObject(objectId) {
+    const idx = state.shelfObjects.indexOf(objectId);
+    if (idx === -1) {
+        state.shelfObjects.push(objectId);
+    } else {
+        state.shelfObjects.splice(idx, 1);
+    }
+}
+
+// ─── Profile decorations ────────────────────────────────────────────────────
+export function toggleProfileSticker(stickerId) {
+    const idx = state.profileStickers.indexOf(stickerId);
+    if (idx === -1) {
+        state.profileStickers.push(stickerId);
+    } else {
+        state.profileStickers.splice(idx, 1);
+    }
+}
+
+
+
 // ─── Hydrate from shared data ────────────────────────────────────────────────
 export function hydrateState(shared) {
     if (shared.profile) Object.assign(state.profile, shared.profile);
     if (shared.bgColor) state.bgColor = shared.bgColor;
     if (shared.radioColors) Object.assign(state.radioColors, shared.radioColors);
     if (shared.shelfColor) state.shelfColor = shared.shelfColor;
+    if (shared.shelfInterior) state.shelfInterior = shared.shelfInterior;
+    if (shared.shelfOutline) state.shelfOutline = shared.shelfOutline;
+    if (shared.shelfPlank) state.shelfPlank = shared.shelfPlank;
+    if (shared.shelfObjects) state.shelfObjects = shared.shelfObjects;
+    if (shared.profileStickers) state.profileStickers = shared.profileStickers;
+    if (shared.placedStickers) state.placedStickers = shared.placedStickers;
+    if (shared.posterImage) state.posterImage = shared.posterImage;
     if (shared.playlists && shared.playlists.length) state.playlists = shared.playlists;
 }
 

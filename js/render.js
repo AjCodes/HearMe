@@ -1,4 +1,4 @@
-import { SWATCH_COLORS, BG_COLORS, FRAME_IMAGES, RADIO_PRESETS } from "./params.js";
+import { SWATCH_COLORS, BG_COLORS, FRAME_IMAGES, RADIO_PRESETS, SHELF_OBJECTS, SHELF_PRESETS, PROFILE_STICKERS } from "./params.js";
 import { state } from "./state.js";
 
 // ─── Page visibility ──────────────────────────────────────────────────────────
@@ -52,7 +52,7 @@ export function renderRoom() {
         photoSlot.innerHTML = "";
     }
 
-    // Radio image
+    // Radio colors
     const boombox = document.getElementById("boombox");
     if (boombox && state.radioColors) {
         boombox.style.setProperty("--radio-body", state.radioColors.body);
@@ -62,11 +62,25 @@ export function renderRoom() {
         boombox.style.setProperty("--radio-detail", state.radioColors.detail);
     }
 
-    // Shelf styling
+    // Shelf styling — apply all 4 custom properties
     const shelf = document.querySelector(".shelf");
-    if (shelf && state.shelfColor) {
-        shelf.style.setProperty("--shelf-wood", state.shelfColor);
+    if (shelf) {
+        if (state.shelfColor) shelf.style.setProperty("--shelf-wood", state.shelfColor);
+        if (state.shelfInterior) shelf.style.setProperty("--shelf-interior", state.shelfInterior);
+        if (state.shelfOutline) shelf.style.setProperty("--shelf-outline", state.shelfOutline);
+        if (state.shelfPlank) shelf.style.setProperty("--shelf-plank", state.shelfPlank);
     }
+
+    // Shelf contents
+    renderShelf();
+    // Shelf objects beside the radio
+    renderShelfObjects();
+
+    // Draggable stickers
+    renderStickers();
+
+    // Poster
+    renderPoster();
 }
 
 function renderShelf() {
@@ -85,7 +99,6 @@ function renderShelf() {
         container.appendChild(spine);
     });
 
-    // Add "+" button
     const addBtn = document.createElement("button");
     addBtn.className = "btn-add-playlist";
     addBtn.textContent = "+";
@@ -93,7 +106,57 @@ function renderShelf() {
     container.appendChild(addBtn);
 }
 
-// ─── Wizard sidebar label (updates live while typing) ─────────────────────────
+
+function renderShelfObjects() {
+    const display = document.getElementById("shelf-objects-display");
+    if (!display) return;
+    display.innerHTML = "";
+
+    // Limit to max 2 objects beside the radio
+    const visibleObjects = state.shelfObjects.slice(0, 2);
+    visibleObjects.forEach((objId) => {
+        const objDef = SHELF_OBJECTS.find((o) => o.id === objId);
+        if (!objDef) return;
+        const el = document.createElement("div");
+        el.className = "shelf-display-object";
+        el.innerHTML = `<span class="obj-icon">${objDef.svg}</span>`;
+        el.title = objDef.label;
+        display.appendChild(el);
+    });
+}
+
+function renderStickers() {
+    const canvas = document.getElementById("stickers-canvas");
+    if (!canvas) return;
+    canvas.innerHTML = "";
+
+    (state.placedStickers || []).forEach((sticker, index) => {
+        const def = PROFILE_STICKERS.find((s) => s.id === sticker.id);
+        if (!def) return;
+        const el = document.createElement("span");
+        el.className = "placed-sticker";
+        el.textContent = def.emoji;
+        el.style.left = `${sticker.x}px`;
+        el.style.top = `${sticker.y}px`;
+        el.dataset.stickerIndex = index;
+        el.title = `${def.label} (drag to move)`;
+        canvas.appendChild(el);
+    });
+}
+
+function renderPoster() {
+    const area = document.getElementById("poster-area");
+    if (!area) return;
+    if (state.posterImage) {
+        area.style.backgroundImage = `url(${state.posterImage})`;
+        area.style.backgroundSize = "cover";
+        area.style.backgroundPosition = "center";
+        const span = area.querySelector("span");
+        if (span) span.style.display = "none";
+    }
+}
+
+// ─── Wizard sidebar label ─────────────────────────────────────────────────────
 export function updateWizardLabels(name) {
     ["wizard-sidebar-label", "wizard-color-label", "wizard-songs-label"].forEach((id) => {
         const el = document.getElementById(id);
@@ -132,14 +195,12 @@ function _renderSwatchGrid(containerId, colors, selected, dataAttr) {
 
 // ─── Radio customizer ─────────────────────────────────────────────────────────
 export function renderRadioCustomizer() {
-    // Sync color inputs with state
     const ids = { body: "radio-color-body", speaker: "radio-color-speaker", handle: "radio-color-handle", buttons: "radio-color-buttons", detail: "radio-color-detail" };
     for (const [key, id] of Object.entries(ids)) {
         const el = document.getElementById(id);
         if (el) el.value = state.radioColors[key];
     }
 
-    // Render preset chips
     const presetRow = document.getElementById("radio-presets");
     if (presetRow) {
         presetRow.innerHTML = "";
@@ -155,8 +216,65 @@ export function renderRadioCustomizer() {
 
 // ─── Shelf customizer ─────────────────────────────────────────────────────────
 export function renderShelfCustomizer() {
-    const el = document.getElementById("shelf-color-main");
-    if (el) el.value = state.shelfColor;
+    // Sync color inputs
+    const mainEl = document.getElementById("shelf-color-main");
+    if (mainEl) mainEl.value = state.shelfColor;
+
+    const intEl = document.getElementById("shelf-color-interior");
+    if (intEl) intEl.value = state.shelfInterior;
+
+    const outEl = document.getElementById("shelf-color-outline");
+    if (outEl) outEl.value = state.shelfOutline;
+
+    const plankEl = document.getElementById("shelf-color-plank");
+    if (plankEl) plankEl.value = state.shelfPlank;
+
+    // Render shelf presets
+    const presetRow = document.getElementById("shelf-presets");
+    if (presetRow) {
+        presetRow.innerHTML = "";
+        SHELF_PRESETS.forEach((preset, i) => {
+            const chip = document.createElement("div");
+            chip.className = "preset-chip";
+            chip.dataset.shelfPresetIndex = i;
+            chip.innerHTML = `<div class="preset-dot" style="background:${preset.wood}"></div><div class="preset-dot" style="background:${preset.interior}"></div><span>${preset.name}</span>`;
+            presetRow.appendChild(chip);
+        });
+    }
+
+    // Render shelf object picker (large cards)
+    const objGrid = document.getElementById("shelf-object-grid");
+    if (objGrid) {
+        objGrid.innerHTML = "";
+        SHELF_OBJECTS.forEach((obj) => {
+            const card = document.createElement("div");
+            card.className = "shelf-object-card" + (state.shelfObjects.includes(obj.id) ? " selected" : "");
+            card.dataset.shelfObject = obj.id;
+            card.innerHTML = `${obj.svg}<span>${obj.label}</span>`;
+            objGrid.appendChild(card);
+        });
+    }
+}
+
+// ─── Background picker — sticker picker is here ──────────────────────────────
+export function renderBgPicker() {
+    renderBgColorGrid(state.bgColor);
+    renderStickerPicker();
+}
+
+function renderStickerPicker() {
+    const grid = document.getElementById("sticker-picker-grid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    PROFILE_STICKERS.forEach((sticker) => {
+        const card = document.createElement("div");
+        card.className = "decoration-card";
+        card.dataset.addSticker = sticker.id;
+        card.innerHTML = `<span class="deco-emoji">${sticker.emoji}</span><span>${sticker.label}</span>`;
+        card.title = "Click to place on room";
+        grid.appendChild(card);
+    });
 }
 
 // ─── Frame picker ─────────────────────────────────────────────────────────────
@@ -205,7 +323,13 @@ function _buildSongItem(song) {
 
     const thumb = document.createElement("div");
     thumb.className = "song-thumb";
-    thumb.style.background = song.color;
+    if (song.cover) {
+        thumb.style.backgroundImage = `url(${song.cover})`;
+        thumb.style.backgroundSize = "cover";
+        thumb.style.backgroundPosition = "center";
+    } else {
+        thumb.style.background = song.color;
+    }
 
     const info = document.createElement("div");
     info.className = "song-info";
@@ -229,6 +353,14 @@ export function renderEditPlaylist() {
     if (!list) return;
     list.innerHTML = "";
 
+    // Apply draft playlist color to the edit panel
+    const panel = list.closest(".edit-panel");
+    if (panel && state.draft?.color) {
+        const c = state.draft.color;
+        // Create a lighter tint for the panel background
+        panel.style.setProperty("--playlist-panel-color", `${c}30`);
+    }
+
     const songs = state.draft?.songs ?? [];
     if (songs.length === 0) {
         list.innerHTML = '<p style="font-size:0.8rem;color:#666;padding:0.5rem;">No songs yet — add some!</p>';
@@ -246,7 +378,13 @@ export function renderEditPlaylist() {
 
         const thumb = document.createElement("div");
         thumb.className = "edit-thumb";
-        thumb.style.background = song.color;
+        if (song.cover) {
+            thumb.style.backgroundImage = `url(${song.cover})`;
+            thumb.style.backgroundSize = "cover";
+            thumb.style.backgroundPosition = "center";
+        } else {
+            thumb.style.background = song.color;
+        }
 
         const info = document.createElement("div");
         info.className = "edit-info";

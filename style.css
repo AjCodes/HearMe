@@ -13,6 +13,9 @@
     --input-line: #999;
     --shelf-wood: #b5813b;
     --shelf-dark: #8a5e22;
+    --shelf-interior: #c9a96e;
+    --shelf-outline: #8a5e22;
+    --shelf-plank: #8a5e22;
     --board-bg: #c9a96e;
     --board-border: #5c3d1e;
 }
@@ -356,7 +359,7 @@ body {
 
 /* Edit playlist panel */
 .edit-panel {
-    background: var(--mauve);
+    background: var(--playlist-panel-color, var(--mauve));
     border-radius: 10px;
     padding: 1rem;
 }
@@ -641,6 +644,26 @@ body {
         inset 0 2px 4px rgba(0, 0, 0, 0.4),
         0 1px 2px rgba(255, 255, 255, 0.1);
     border: 2px solid color-mix(in srgb, var(--radio-speaker) 100%, black 30%);
+    transition: transform 0.15s ease;
+}
+
+/* Speaker boom animation when playing */
+.boombox-wrapper.playing .boombox-speaker {
+    animation: speakerBoom 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes speakerBoom {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
+
+    100% {
+        transform: scale(0.97);
+    }
 }
 
 .speaker-cone {
@@ -1086,7 +1109,7 @@ body {
     width: 100%;
     position: relative;
     /* Rich oak wood base with realistic grain */
-    background-color: #b07830;
+    background-color: var(--shelf-wood);
     background-image:
         /* Fine grain lines */
         repeating-linear-gradient(88deg,
@@ -1101,16 +1124,16 @@ body {
             rgba(120, 70, 15, 0.05) 40px, rgba(120, 70, 15, 0.05) 45px),
         /* Overall depth gradient */
         linear-gradient(180deg,
-            #c89040 0%, #b88035 15%, #a87028 50%, #8d5c1e 85%, #7a4e18 100%);
+            color-mix(in srgb, var(--shelf-wood) 80%, white 20%) 0%,
+            var(--shelf-wood) 15%,
+            color-mix(in srgb, var(--shelf-wood) 85%, black 15%) 50%,
+            color-mix(in srgb, var(--shelf-wood) 75%, black 25%) 85%,
+            color-mix(in srgb, var(--shelf-wood) 70%, black 30%) 100%);
     /* 3D frame edges */
-    border-top: 14px solid;
-    border-left: 14px solid;
-    border-right: 14px solid;
+    border-top: 14px solid var(--shelf-outline);
+    border-left: 14px solid var(--shelf-outline);
+    border-right: 14px solid color-mix(in srgb, var(--shelf-outline) 90%, black 10%);
     border-bottom: none;
-    border-image: linear-gradient(180deg, #9e7030 0%, #7a5020 40%, #6a4418 100%) 1;
-    border-top-color: #8a6525;
-    border-left-color: #7a5820;
-    border-right-color: #6e4e1a;
     border-radius: 3px 3px 0 0;
     box-shadow:
         /* Inner top highlight */
@@ -1124,24 +1147,31 @@ body {
         0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Top bay — holds playlist spines */
+/* Top bay — holds playlist spines and the alien mascot */
 .shelf-top-bay {
     height: 120px;
     position: relative;
     padding: 8px 12px 0;
+    display: flex;
+    align-items: flex-end;
     /* Recessed back panel feel */
     background: linear-gradient(180deg,
             rgba(0, 0, 0, 0.08) 0%,
             rgba(0, 0, 0, 0.03) 20%,
             transparent 50%,
             rgba(0, 0, 0, 0.05) 100%);
+    background-color: var(--shelf-interior);
 }
 
 /* Middle plank divider */
 .shelf-plank {
     height: 16px;
     background: linear-gradient(180deg,
-            #a07028 0%, #8a5e20 20%, #7a5018 50%, #8a5e20 80%, #a07028 100%);
+            color-mix(in srgb, var(--shelf-plank) 80%, white 20%) 0%,
+            var(--shelf-plank) 20%,
+            color-mix(in srgb, var(--shelf-plank) 90%, black 10%) 50%,
+            var(--shelf-plank) 80%,
+            color-mix(in srgb, var(--shelf-plank) 80%, white 20%) 100%);
     box-shadow:
         0 4px 10px rgba(0, 0, 0, 0.25),
         0 -2px 6px rgba(0, 0, 0, 0.12),
@@ -1153,11 +1183,225 @@ body {
 /* Bottom bay — empty */
 .shelf-bottom-bay {
     height: 100px;
-    background: linear-gradient(180deg,
+    background-color: var(--shelf-interior);
+    background-image: linear-gradient(180deg,
             rgba(0, 0, 0, 0.06) 0%,
             rgba(0, 0, 0, 0.02) 30%,
             transparent 60%,
             rgba(0, 0, 0, 0.04) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 16px;
+}
+
+
+/* Large shelf objects sitting on the shelf surface, next to the radio */
+.shelf-objects-display {
+    position: absolute;
+    left: 390px;
+    bottom: 250px;
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    z-index: 2;
+}
+
+.shelf-display-object {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 235, 225, 0.85));
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    cursor: default;
+    animation: shelfObjBounce 0.4s ease-out;
+    flex-shrink: 0;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.shelf-display-object .obj-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.15));
+    line-height: 1;
+}
+
+@keyframes shelfObjBounce {
+    0% {
+        transform: scale(0) translateY(10px);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.15) translateY(-3px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Stickers canvas (full room, stickers are absolute-positioned) */
+.stickers-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.placed-sticker {
+    position: absolute;
+    font-size: 2rem;
+    cursor: grab;
+    pointer-events: auto;
+    filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.2));
+    user-select: none;
+    transition: transform 0.1s ease;
+    z-index: 5;
+}
+
+.placed-sticker:active {
+    cursor: grabbing;
+    transform: scale(1.2);
+}
+
+.placed-sticker:hover {
+    transform: scale(1.15);
+}
+
+/* Poster area (below profile frame — uploadable image) */
+.poster-area {
+    position: absolute;
+    top: 290px;
+    right: 80px;
+    width: 200px;
+    height: 270px;
+    background: rgba(220, 215, 210, 0.75);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    color: #777;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 3px 6px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.poster-area:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Shelf object picker grid in customizer */
+.shelf-object-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.shelf-object-card {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 10px;
+    background: #f8f8f8;
+    border: 2px solid #e0e0e0;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+    font-size: 2rem;
+}
+
+.shelf-object-card span {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #666;
+}
+
+.shelf-object-card:hover {
+    border-color: #999;
+    transform: scale(1.08);
+}
+
+.shelf-object-card.selected {
+    border-color: var(--btn);
+    background: rgba(139, 159, 212, 0.15);
+    box-shadow: 0 0 0 2px rgba(139, 159, 212, 0.3);
+}
+
+/* Profile sticker picker grid (in bg-picker page) */
+.decoration-picker-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.decoration-card {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 10px;
+    background: #f8f8f8;
+    border: 2px solid #e0e0e0;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+}
+
+.decoration-card .deco-emoji {
+    font-size: 1.3rem;
+}
+
+.decoration-card span {
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: #666;
+}
+
+.decoration-card:hover {
+    border-color: #999;
+    transform: scale(1.08);
+}
+
+.decoration-card.selected {
+    border-color: var(--btn);
+    background: rgba(139, 159, 212, 0.15);
+    box-shadow: 0 0 0 2px rgba(139, 159, 212, 0.3);
+}
+
+.customizer-section-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #555;
+    margin: 1rem 0 0.5rem;
+    text-align: center;
 }
 
 /* Playlist spines — inside the top bay */
@@ -1405,12 +1649,15 @@ body {
     top: 38%;
     left: 30%;
     right: 30%;
+    max-width: 130px;
+    margin: 0 auto;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 3px;
     padding: 4px 6px;
     text-align: center;
     pointer-events: none;
     z-index: 3;
+    overflow: hidden;
 }
 
 .now-playing-song {

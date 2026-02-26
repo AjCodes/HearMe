@@ -1,4 +1,4 @@
-import { RADIO_PRESETS } from "./params.js";
+import { RADIO_PRESETS, SHELF_PRESETS, PROFILE_STICKERS } from "./params.js";
 import { navigateTo, onPopState, encodeRoomToURL, decodeRoomFromURL } from "./router.js";
 import {
     state,
@@ -12,6 +12,12 @@ import {
     setProfile,
     setRadioColors,
     setFrame,
+    setShelfColor,
+    setShelfInterior,
+    setShelfOutline,
+    setShelfPlank,
+    toggleShelfObject,
+    toggleProfileSticker,
     hydrateState,
     playSong,
     togglePlayPause,
@@ -30,6 +36,7 @@ import {
     renderRadioCustomizer,
     renderFramePicker,
     renderShelfCustomizer,
+    renderBgPicker,
 } from "./render.js";
 
 // ─── Song library (loaded from songs.json) ─────────────────────────────────────
@@ -46,6 +53,47 @@ async function loadSongs() {
             { id: "s2", name: "APT.", artist: "ROSÉ & Bruno Mars", color: "#f4a0b8" },
             { id: "s3", name: "Birds of a Feather", artist: "Billie Eilish", color: "#a0d4f4" },
         ];
+    }
+}
+
+// ─── Audio playback (fetches fresh Deezer preview on each play) ───────────────
+let audioPlayer = null;
+
+async function fetchFreshPreviewUrl(songName, artist) {
+    try {
+        const query = encodeURIComponent(`${songName} ${artist}`);
+        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(`https://api.deezer.com/search?q=${query}&limit=1`)}`);
+        const data = await res.json();
+        if (data.data && data.data.length > 0 && data.data[0].preview) {
+            return data.data[0].preview;
+        }
+    } catch (err) {
+        console.warn("Fresh preview fetch failed:", err);
+    }
+    return null;
+}
+
+async function startPlayback(song) {
+    stopPlayback();
+    // Try fresh URL first, fall back to stored
+    let previewUrl = await fetchFreshPreviewUrl(song.name, song.artist);
+    if (!previewUrl) previewUrl = song.preview;
+    if (previewUrl) {
+        audioPlayer = new Audio(previewUrl);
+        audioPlayer.volume = 0.5;
+        audioPlayer.play().catch(() => { });
+        audioPlayer.addEventListener("ended", () => {
+            playNext();
+            updatePlaybackUI();
+        });
+    }
+}
+
+function stopPlayback() {
+    if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.src = "";
+        audioPlayer = null;
     }
 }
 
@@ -70,7 +118,7 @@ function renderAll() {
         renderSongSearch("", SONG_LIBRARY);
         renderEditPlaylist();
     } else if (state.page === "bg-picker") {
-        renderBgColorGrid(state.bgColor);
+        renderBgPicker();
     } else if (state.page === "radio-picker") {
         renderRadioCustomizer();
     } else if (state.page === "frame-picker") {
@@ -82,19 +130,47 @@ function renderAll() {
 }
 
 // ─── Playback UI updates ───────────────────────────────────────────────────────
+let currentlyPlayingSongId = null;
+
 function updatePlaybackUI() {
     const song = state.player.currentSong;
     const isPlaying = state.player.isPlaying;
 
-    // Radio screen
     const npSong = document.getElementById("now-playing-song");
     const npArtist = document.getElementById("now-playing-artist");
     if (npSong) npSong.textContent = song ? song.name : "No song playing";
     if (npArtist) npArtist.textContent = song ? song.artist : "";
 
-    // Play/pause button on radio
     const pbBtn = document.getElementById("btn-play-pause");
     if (pbBtn) pbBtn.textContent = isPlaying ? "⏸" : "▶";
+
+    // Handle audio — restart if song changed, pause/resume if same song
+    if (song && isPlaying) {
+        if (currentlyPlayingSongId !== song.id) {
+            // New song — start fresh
+            currentlyPlayingSongId = song.id;
+            startPlayback(song);
+        } else if (audioPlayer && audioPlayer.paused) {
+            // Same song, was paused — resume
+            audioPlayer.play().catch(() => { });
+        }
+    } else if (song && !isPlaying) {
+        // Paused
+        if (audioPlayer) audioPlayer.pause();
+    } else {
+        stopPlayback();
+        currentlyPlayingSongId = null;
+    }
+
+    // Toggle speaker animation
+    const boombox = document.querySelector(".boombox-wrapper");
+    if (boombox) {
+        if (song && isPlaying) {
+            boombox.classList.add("playing");
+        } else {
+            boombox.classList.remove("playing");
+        }
+    }
 }
 
 // ─── Apply radio colors live ───────────────────────────────────────────────────
@@ -126,7 +202,7 @@ function openPlaylistViewer(playlistIndex) {
     } else {
         songsList.innerHTML = pl.songs.map((song, si) => `
             <div class="viewer-song" data-viewer-play-pl="${playlistIndex}" data-viewer-play-si="${si}">
-                <div class="viewer-song-color" style="background:${song.color || pl.color}"></div>
+                <div class="viewer-song-color" style="${song.cover ? `background-image:url(${song.cover});background-size:cover;background-position:center` : `background:${song.color || pl.color}`}"></div>
                 <div class="viewer-song-info">
                     <div class="viewer-song-name">${song.name}</div>
                     <div class="viewer-song-artist">${song.artist}</div>
@@ -192,27 +268,72 @@ function startEditingField(el) {
     }
 }
 
+// ─── Draggable sticker logic ──────────────────────────────────────────────────
+let draggingSticker = null;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+
+function initStickerDrag() {
+    const canvas = document.getElementById("stickers-canvas");
+    if (!canvas) return;
+
+    canvas.addEventListener("pointerdown", (e) => {
+        const sticker = e.target.closest(".placed-sticker");
+        if (!sticker) return;
+        e.preventDefault();
+        sticker.setPointerCapture(e.pointerId);
+        draggingSticker = sticker;
+        const rect = sticker.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        dragOffsetX = e.clientX - rect.left;
+        dragOffsetY = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener("pointermove", (e) => {
+        if (!draggingSticker) return;
+        e.preventDefault();
+        const canvasRect = canvas.getBoundingClientRect();
+        const x = e.clientX - canvasRect.left - dragOffsetX;
+        const y = e.clientY - canvasRect.top - dragOffsetY;
+        draggingSticker.style.left = `${x}px`;
+        draggingSticker.style.top = `${y}px`;
+    });
+
+    canvas.addEventListener("pointerup", (e) => {
+        if (!draggingSticker) return;
+        const index = parseInt(draggingSticker.dataset.stickerIndex, 10);
+        const canvasRect = canvas.getBoundingClientRect();
+        const x = e.clientX - canvasRect.left - dragOffsetX;
+        const y = e.clientY - canvasRect.top - dragOffsetY;
+
+        // Update state
+        if (state.placedStickers && state.placedStickers[index]) {
+            state.placedStickers[index].x = Math.max(0, x);
+            state.placedStickers[index].y = Math.max(0, y);
+        }
+        draggingSticker = null;
+    });
+}
+
 // ─── Global click delegation ───────────────────────────────────────────────────
 document.addEventListener("click", (e) => {
 
-    // ── Nav buttons (data-nav attribute) ──────────────────────────────────────
+    // ── Nav buttons ───────────────────────────────────────────────────────────
     const navEl = e.target.closest("[data-nav]");
     if (navEl) {
         e.preventDefault();
         const target = navEl.dataset.nav;
-
         if (target === "playlist-name") {
             startNewPlaylist();
             updateWizardLabels("New Playlist");
             goTo("playlist-name");
             return;
         }
-
         goTo(target);
         return;
     }
 
-    // ── Playback controls (on the radio) ──────────────────────────────────────
+    // ── Playback controls ─────────────────────────────────────────────────────
     if (e.target.id === "btn-play-pause" || e.target.closest("#btn-play-pause")) {
         e.stopPropagation();
         togglePlayPause();
@@ -234,7 +355,7 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Playlist viewer — play a song from viewer ────────────────────────────
+    // ── Playlist viewer — play a song ─────────────────────────────────────────
     const viewerSong = e.target.closest("[data-viewer-play-pl]");
     if (viewerSong) {
         const pi = parseInt(viewerSong.dataset.viewerPlayPl, 10);
@@ -267,13 +388,11 @@ document.addEventListener("click", (e) => {
     // ── Floating Edit Menu Toggle ─────────────────────────────────────────────
     if (e.target.id === "btn-edit-toggle" || e.target.closest("#btn-edit-toggle")) {
         const menuItems = document.getElementById("edit-menu-items");
-        if (menuItems) {
-            menuItems.classList.toggle("hidden");
-        }
+        if (menuItems) menuItems.classList.toggle("hidden");
         return;
     }
 
-    // Close the floating edit menu if clicking outside of it
+    // Close edit menu on outside click
     const editMenu = document.getElementById("edit-menu");
     const menuItemsObj = document.getElementById("edit-menu-items");
     if (editMenu && menuItemsObj && !editMenu.contains(e.target)) {
@@ -302,14 +421,14 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Customize radio button ────────────────────────────────────────────────
+    // ── Customize radio ───────────────────────────────────────────────────────
     if (e.target.id === "btn-customize-radio" || e.target.closest("#btn-customize-radio")) {
         e.stopPropagation();
         goTo("radio-picker");
         return;
     }
 
-    // ── Radio preset chips ────────────────────────────────────────────────────
+    // ── Radio presets ─────────────────────────────────────────────────────────
     const presetChip = e.target.closest("[data-preset-index]");
     if (presetChip) {
         const idx = parseInt(presetChip.dataset.presetIndex, 10);
@@ -328,7 +447,7 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Add playlist button (shelf) ────────────────────────────────────────────
+    // ── Add playlist ──────────────────────────────────────────────────────────
     if (e.target.id === "btn-add-playlist" || e.target.closest("#btn-add-playlist")) {
         startNewPlaylist();
         updateWizardLabels("New Playlist");
@@ -336,15 +455,14 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Playlist spine click → open viewer ─────────────────────────────────────
+    // ── Playlist spine → viewer ───────────────────────────────────────────────
     const spine = e.target.closest(".playlist-spine");
     if (spine && spine.dataset.playlistIndex !== undefined) {
-        const idx = parseInt(spine.dataset.playlistIndex, 10);
-        openPlaylistViewer(idx);
+        openPlaylistViewer(parseInt(spine.dataset.playlistIndex, 10));
         return;
     }
 
-    // ── Wizard: Name → Next ────────────────────────────────────────────────────
+    // ── Wizard steps ──────────────────────────────────────────────────────────
     if (e.target.id === "btn-name-next") {
         const nameInput = document.getElementById("input-playlist-name");
         const name = nameInput?.value.trim() || "New Playlist";
@@ -354,25 +472,21 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Wizard: Color swatch selected ─────────────────────────────────────────
     const colorSwatch = e.target.closest("[data-playlist-color]");
     if (colorSwatch) {
         const color = colorSwatch.dataset.playlistColor;
         if (state.draft) state.draft.color = color;
         renderPlaylistColorGrid(color);
-        // Update sidebar preview color
         const sidebar = document.getElementById("wizard-color-label");
         if (sidebar) sidebar.style.background = color;
         return;
     }
 
-    // ── Wizard: Color → Next ───────────────────────────────────────────────────
     if (e.target.id === "btn-color-next") {
         goTo("playlist-songs");
         return;
     }
 
-    // ── Wizard: Add song to draft ──────────────────────────────────────────────
     const addSongBtn = e.target.closest("[data-song-id]");
     if (addSongBtn) {
         const songId = addSongBtn.dataset.songId;
@@ -384,7 +498,6 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Wizard: Remove song from draft ────────────────────────────────────────
     const removeSongBtn = e.target.closest("[data-remove-song-id]");
     if (removeSongBtn) {
         removeSongFromDraft(removeSongBtn.dataset.removeSongId);
@@ -392,7 +505,6 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Wizard: Done (commit + go to room) ────────────────────────────────────
     if (e.target.id === "btn-songs-done") {
         commitDraft();
         goTo("room");
@@ -408,13 +520,13 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Poster area click ─────────────────────────────────────────────────────
+    // ── Poster area click → upload poster image ───────────────────────────────
     if (e.target.id === "poster-area" || e.target.closest("#poster-area")) {
         document.getElementById("poster-input")?.click();
         return;
     }
 
-    // ── Profile photo click ───────────────────────────────────────────────────
+    // ── Profile photo ─────────────────────────────────────────────────────────
     if (e.target.id === "profile-photo-btn" || e.target.closest("#profile-photo-btn")) {
         document.getElementById("profile-photo-input")?.click();
         return;
@@ -427,22 +539,72 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Change frame button ───────────────────────────────────────────────────
+    // ── Frame picker ──────────────────────────────────────────────────────────
     if (e.target.id === "btn-change-frame" || e.target.closest("#btn-change-frame")) {
         goTo("frame-picker");
         return;
     }
 
-    // ── Frame picker — select a frame ─────────────────────────────────────────
     const frameCard = e.target.closest("[data-frame-index]");
     if (frameCard) {
         setFrame(parseInt(frameCard.dataset.frameIndex, 10));
         renderFramePicker();
         return;
     }
+
+
+    // ── Shelf object picker ───────────────────────────────────────────────────
+    const shelfObjCard = e.target.closest("[data-shelf-object]");
+    if (shelfObjCard) {
+        toggleShelfObject(shelfObjCard.dataset.shelfObject);
+        renderShelfCustomizer();
+        return;
+    }
+
+    // ── Shelf presets ─────────────────────────────────────────────────────────
+    const shelfPresetChip = e.target.closest("[data-shelf-preset-index]");
+    if (shelfPresetChip) {
+        const idx = parseInt(shelfPresetChip.dataset.shelfPresetIndex, 10);
+        const preset = SHELF_PRESETS[idx];
+        if (preset) {
+            setShelfColor(preset.wood);
+            setShelfInterior(preset.interior);
+            setShelfOutline(preset.outline);
+            setShelfPlank(preset.plank);
+            renderShelfCustomizer();
+        }
+        return;
+    }
+
+    // ── Sticker picker — add sticker to room at default position ──────────────
+    const stickerCard = e.target.closest("[data-add-sticker]");
+    if (stickerCard) {
+        const stickerId = stickerCard.dataset.addSticker;
+        // Initialize placedStickers if needed
+        if (!state.placedStickers) state.placedStickers = [];
+        // Place sticker at a random position in the upper portion of the room
+        const x = 150 + Math.random() * 400;
+        const y = 50 + Math.random() * 200;
+        state.placedStickers.push({ id: stickerId, x, y });
+        // Re-render sticker picker to show feedback (optional: could add visual feedback)
+        return;
+    }
+
+    // ── Double-click sticker to remove ────────────────────────────────────────
+    // (handled via dblclick below)
 });
 
-// ─── Input events (search, radio color pickers, etc.) ──────────────────────────
+// ── Double-click to remove stickers ───────────────────────────────────────────
+document.addEventListener("dblclick", (e) => {
+    const sticker = e.target.closest(".placed-sticker");
+    if (sticker && state.placedStickers) {
+        const index = parseInt(sticker.dataset.stickerIndex, 10);
+        state.placedStickers.splice(index, 1);
+        renderRoom();
+    }
+});
+
+// ─── Input events ─────────────────────────────────────────────────────────────
 document.addEventListener("input", (e) => {
     if (e.target.id === "input-playlist-name") {
         const name = e.target.value || "New Playlist";
@@ -456,7 +618,7 @@ document.addEventListener("input", (e) => {
         return;
     }
 
-    // Radio color inputs — live update
+    // Radio color inputs
     const colorMap = {
         "radio-color-body": "body",
         "radio-color-speaker": "speaker",
@@ -470,10 +632,25 @@ document.addEventListener("input", (e) => {
         return;
     }
 
-    // Shelf color input — live update
+    // Shelf color inputs
     if (e.target.id === "shelf-color-main") {
         setShelfColor(e.target.value);
-        renderRoom(); // re-render room to apply shelf color
+        renderRoom();
+        return;
+    }
+    if (e.target.id === "shelf-color-interior") {
+        setShelfInterior(e.target.value);
+        renderRoom();
+        return;
+    }
+    if (e.target.id === "shelf-color-outline") {
+        setShelfOutline(e.target.value);
+        renderRoom();
+        return;
+    }
+    if (e.target.id === "shelf-color-plank") {
+        setShelfPlank(e.target.value);
+        renderRoom();
         return;
     }
 });
@@ -495,6 +672,7 @@ document.getElementById("poster-input")?.addEventListener("change", (e) => {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
+        state.posterImage = ev.target.result;
         const area = document.getElementById("poster-area");
         if (area) {
             area.style.backgroundImage = `url(${ev.target.result})`;
@@ -536,12 +714,16 @@ async function init() {
     await loadSongs();
 
     const shared = decodeRoomFromURL();
-    if (shared) {
-        hydrateState(shared);
-    }
+    if (shared) hydrateState(shared);
+
+    // Initialize placedStickers array if not present
+    if (!state.placedStickers) state.placedStickers = [];
 
     setPage("room");
     renderAll();
+
+    // Set up sticker drag after DOM is ready
+    initStickerDrag();
 }
 
 init();

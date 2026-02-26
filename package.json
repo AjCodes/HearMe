@@ -11,6 +11,6 @@
   "author": "Lisa-Marie, Sam, AJ",
   "license": "ISC",
   "devDependencies": {
-    "serve": "^14.2.4"
+    "serve": "^13.0.4"
   }
 }
