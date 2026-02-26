@@ -16,7 +16,7 @@ import {
     setShelfInterior,
     setShelfOutline,
     setShelfPlank,
-    toggleShelfObject,
+    setShelfMascot,
     toggleProfileSticker,
     hydrateState,
     playSong,
@@ -553,10 +553,11 @@ document.addEventListener("click", (e) => {
     }
 
 
-    // ── Shelf object picker ───────────────────────────────────────────────────
-    const shelfObjCard = e.target.closest("[data-shelf-object]");
-    if (shelfObjCard) {
-        toggleShelfObject(shelfObjCard.dataset.shelfObject);
+    // ── Shelf mascot picker ───────────────────────────────────────────────────
+    const shelfMascotCard = e.target.closest("[data-shelf-mascot]");
+    if (shelfMascotCard) {
+        const mascotId = shelfMascotCard.dataset.shelfMascot;
+        setShelfMascot(mascotId);
         renderShelfCustomizer();
         return;
     }

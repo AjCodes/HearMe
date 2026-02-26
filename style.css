@@ -1147,7 +1147,7 @@ body {
         0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Top bay — holds playlist spines and the alien mascot */
+/* Top bay — holds playlist spines */
 .shelf-top-bay {
     height: 120px;
     position: relative;
@@ -1197,58 +1197,32 @@ body {
 }
 
 
-/* Large shelf objects sitting on the shelf surface, next to the radio */
-.shelf-objects-display {
+/* Dancing mascot (transparent GIF) beside the radio */
+.shelf-mascot-display {
     position: absolute;
-    left: 390px;
-    bottom: 250px;
+    right: -128px;
+    bottom: -12px;
+    width: 118px;
+    height: 118px;
     display: flex;
     align-items: flex-end;
-    gap: 16px;
-    z-index: 2;
-}
-
-.shelf-display-object {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 70px;
-    height: 70px;
-    border-radius: 16px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 235, 225, 0.85));
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.2),
-        0 1px 3px rgba(0, 0, 0, 0.1),
-        inset 0 1px 2px rgba(255, 255, 255, 0.6);
-    cursor: default;
-    animation: shelfObjBounce 0.4s ease-out;
-    flex-shrink: 0;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    overflow: visible;
+    z-index: 3;
+    pointer-events: none;
 }
 
-.shelf-display-object .obj-icon {
-    font-size: 2.5rem;
-    filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.15));
-    line-height: 1;
+.shelf-mascot-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
 }
 
-@keyframes shelfObjBounce {
-    0% {
-        transform: scale(0) translateY(10px);
-        opacity: 0;
-    }
-
-    60% {
-        transform: scale(1.15) translateY(-3px);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-    }
+.shelf-mascot-gif[data-mascot-id="mascot6"] {
+    transform: scale(1.22);
+    transform-origin: center bottom;
 }
 
 /* Stickers canvas (full room, stickers are absolute-positioned) */
@@ -1307,8 +1281,8 @@ body {
 }
 
 
-/* Shelf object picker grid in customizer */
-.shelf-object-grid {
+/* Shelf mascot picker grid in customizer */
+.shelf-mascot-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
@@ -1317,34 +1291,41 @@ body {
     margin: 0 auto;
 }
 
-.shelf-object-card {
-    width: 70px;
-    height: 70px;
+.shelf-mascot-card {
+    width: 92px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    gap: 4px;
     border-radius: 10px;
     background: #f8f8f8;
     border: 2px solid #e0e0e0;
     cursor: pointer;
     transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
-    font-size: 2rem;
+    padding: 6px;
 }
 
-.shelf-object-card span {
+.shelf-mascot-card img {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.shelf-mascot-card span {
     font-size: 0.55rem;
     font-weight: 700;
     color: #666;
 }
 
-.shelf-object-card:hover {
+.shelf-mascot-card:hover {
     border-color: #999;
     transform: scale(1.08);
 }
 
-.shelf-object-card.selected {
+.shelf-mascot-card.selected {
     border-color: var(--btn);
     background: rgba(139, 159, 212, 0.15);
     box-shadow: 0 0 0 2px rgba(139, 159, 212, 0.3);
@@ -2008,6 +1989,13 @@ body {
         align-self: center;
         transform: scale(0.9);
         transform-origin: center;
+    }
+
+    .shelf-mascot-display {
+        right: -76px;
+        bottom: -4px;
+        width: 84px;
+        height: 84px;
     }
 
     .radio-overlay {

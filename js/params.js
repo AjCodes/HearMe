@@ -48,20 +48,16 @@ export const SHELF_PRESETS = [
     { name: "Rose", wood: "#9e6b6b", interior: "#b88888", outline: "#7a4e4e", plank: "#8a5e5e" },
 ];
 
-// ─── Shelf decorative objects (large items beside the radio) ──────────────────
-export const SHELF_OBJECTS = [
-    { id: "plant", svg: "🪴", label: "Plant", size: "3.5rem" },
-    { id: "lamp", svg: "🛋️", label: "Lamp", size: "3.5rem" },
-    { id: "books", svg: "📚", label: "Books", size: "3rem" },
-    { id: "coffee", svg: "☕", label: "Coffee", size: "3rem" },
-    { id: "globe", svg: "🌍", label: "Globe", size: "3rem" },
-    { id: "teddy", svg: "🧸", label: "Teddy", size: "3.5rem" },
-    { id: "candle", svg: "🕯️", label: "Candle", size: "3rem" },
-    { id: "clock", svg: "🕰️", label: "Clock", size: "3rem" },
-    { id: "camera", svg: "📷", label: "Camera", size: "3rem" },
-    { id: "trophy", svg: "🏆", label: "Trophy", size: "3rem" },
-    { id: "vinyl", svg: "💿", label: "Vinyl", size: "3rem" },
-    { id: "headphones", svg: "🎧", label: "Headphones", size: "3rem" },
+// ─── Shelf mascot GIF options (transparent GIFs beside the radio) ─────────────
+export const MASCOT_GIFS = [
+    { id: "mascot1", label: "Mascot 1", src: "./photos/mascots/mascot1.gif" },
+    { id: "mascot2", label: "Mascot 2", src: "./photos/mascots/mascot2.gif" },
+    { id: "mascot3", label: "Mascot 3", src: "./photos/mascots/mascot3.gif" },
+    { id: "mascot4", label: "Mascot 4", src: "./photos/mascots/mascot4.gif" },
+    { id: "mascot5", label: "Mascot 5", src: "./photos/mascots/mascot5.gif" },
+    { id: "mascot6", label: "Mascot 6", src: "./photos/mascots/mascot6.gif" },
+    { id: "mascot7", label: "Mascot 7", src: "./photos/mascots/mascot7.gif" },
+    { id: "mascot8", label: "Mascot 8", src: "./photos/mascots/mascot8.gif" },
 ];
 
 // ─── Profile stickers (draggable on the room) ────────────────────────────────
@@ -112,8 +108,8 @@ export const DEFAULT_STATE = {
     profileStickers: [], // available sticker IDs (legacy, kept for compat)
     placedStickers: [], // array of { id, x, y } for draggable stickers
     posterImage: null, // data URL for uploaded poster image
-    // Shelf objects (large items beside radio)
-    shelfObjects: [],
+    // Shelf mascot (single transparent GIF beside radio)
+    shelfMascot: null,
 };
 
 // Deep-clone the default state

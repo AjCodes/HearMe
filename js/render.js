@@ -1,4 +1,4 @@
-import { SWATCH_COLORS, BG_COLORS, FRAME_IMAGES, RADIO_PRESETS, SHELF_OBJECTS, SHELF_PRESETS, PROFILE_STICKERS } from "./params.js";
+import { SWATCH_COLORS, BG_COLORS, FRAME_IMAGES, RADIO_PRESETS, MASCOT_GIFS, SHELF_PRESETS, PROFILE_STICKERS } from "./params.js";
 import { state } from "./state.js";
 
 // ─── Page visibility ──────────────────────────────────────────────────────────
@@ -73,8 +73,8 @@ export function renderRoom() {
 
     // Shelf contents
     renderShelf();
-    // Shelf objects beside the radio
-    renderShelfObjects();
+    // Shelf mascot beside the radio
+    renderShelfMascot();
 
     // Draggable stickers
     renderStickers();
@@ -107,22 +107,23 @@ function renderShelf() {
 }
 
 
-function renderShelfObjects() {
-    const display = document.getElementById("shelf-objects-display");
+function renderShelfMascot() {
+    const display = document.getElementById("shelf-mascot-display");
     if (!display) return;
     display.innerHTML = "";
 
-    // Limit to max 2 objects beside the radio
-    const visibleObjects = state.shelfObjects.slice(0, 2);
-    visibleObjects.forEach((objId) => {
-        const objDef = SHELF_OBJECTS.find((o) => o.id === objId);
-        if (!objDef) return;
-        const el = document.createElement("div");
-        el.className = "shelf-display-object";
-        el.innerHTML = `<span class="obj-icon">${objDef.svg}</span>`;
-        el.title = objDef.label;
-        display.appendChild(el);
-    });
+    if (!state.shelfMascot) return;
+    const mascot = MASCOT_GIFS.find((m) => m.id === state.shelfMascot);
+    if (!mascot) return;
+
+    const img = document.createElement("img");
+    img.className = "shelf-mascot-gif";
+    img.src = mascot.src;
+    img.alt = mascot.label;
+    img.title = mascot.label;
+    img.dataset.mascotId = mascot.id;
+    img.onerror = () => { display.innerHTML = ""; };
+    display.appendChild(img);
 }
 
 function renderStickers() {
@@ -242,16 +243,16 @@ export function renderShelfCustomizer() {
         });
     }
 
-    // Render shelf object picker (large cards)
-    const objGrid = document.getElementById("shelf-object-grid");
-    if (objGrid) {
-        objGrid.innerHTML = "";
-        SHELF_OBJECTS.forEach((obj) => {
+    // Render mascot picker (single select)
+    const mascotGrid = document.getElementById("shelf-mascot-grid");
+    if (mascotGrid) {
+        mascotGrid.innerHTML = "";
+        MASCOT_GIFS.forEach((mascot) => {
             const card = document.createElement("div");
-            card.className = "shelf-object-card" + (state.shelfObjects.includes(obj.id) ? " selected" : "");
-            card.dataset.shelfObject = obj.id;
-            card.innerHTML = `${obj.svg}<span>${obj.label}</span>`;
-            objGrid.appendChild(card);
+            card.className = "shelf-mascot-card" + (state.shelfMascot === mascot.id ? " selected" : "");
+            card.dataset.shelfMascot = mascot.id;
+            card.innerHTML = `<img src="${mascot.src}" alt="${mascot.label}" /><span>${mascot.label}</span>`;
+            mascotGrid.appendChild(card);
         });
     }
 }

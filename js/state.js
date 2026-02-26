@@ -100,13 +100,8 @@ export function setShelfPlank(color) {
     state.shelfPlank = color;
 }
 
-export function toggleShelfObject(objectId) {
-    const idx = state.shelfObjects.indexOf(objectId);
-    if (idx === -1) {
-        state.shelfObjects.push(objectId);
-    } else {
-        state.shelfObjects.splice(idx, 1);
-    }
+export function setShelfMascot(mascotId) {
+    state.shelfMascot = mascotId || null;
 }
 
 // ─── Profile decorations ────────────────────────────────────────────────────
@@ -130,7 +125,7 @@ export function hydrateState(shared) {
     if (shared.shelfInterior) state.shelfInterior = shared.shelfInterior;
     if (shared.shelfOutline) state.shelfOutline = shared.shelfOutline;
     if (shared.shelfPlank) state.shelfPlank = shared.shelfPlank;
-    if (shared.shelfObjects) state.shelfObjects = shared.shelfObjects;
+    if (shared.shelfMascot !== undefined) state.shelfMascot = shared.shelfMascot;
     if (shared.profileStickers) state.profileStickers = shared.profileStickers;
     if (shared.placedStickers) state.placedStickers = shared.placedStickers;
     if (shared.posterImage) state.posterImage = shared.posterImage;

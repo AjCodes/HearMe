@@ -37,6 +37,7 @@ export function encodeRoomToURL(state) {
     // Background & Shelf
     url.searchParams.set("bg", state.bgColor);
     if (state.shelfColor) url.searchParams.set("sc", state.shelfColor);
+    if (state.shelfMascot) url.searchParams.set("sm", state.shelfMascot);
 
     // Playlists (compact JSON)
     const compactPlaylists = state.playlists.map((pl) => ({
@@ -74,6 +75,7 @@ export function decodeRoomFromURL() {
 
     const bgColor = params.get("bg") || "#c8e8ed";
     const shelfColor = params.get("sc") || null;
+    const shelfMascot = params.get("sm") || null;
 
     let playlists = [];
     try {
@@ -93,6 +95,6 @@ export function decodeRoomFromURL() {
         playlists = [];
     }
 
-    return { profile, radioColors, bgColor, shelfColor, playlists };
+    return { profile, radioColors, bgColor, shelfColor, shelfMascot, playlists };
 }
 
