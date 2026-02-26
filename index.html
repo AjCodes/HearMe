@@ -1,13 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HearMe</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HearMe — Your Music Room</title>
+    <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
-    <h1`>Welcome to HearMe</h1>
-    <p>test test</p>
-    <p>hello!</p>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: ROOM (main view)
+══════════════════════════════════════════════════════════ -->
+    <section id="page-room">
+        <!-- Floating Edit & Share Menu (Bottom Right) -->
+        <div class="fab-container bottom-right" id="edit-menu">
+            <!-- Menu items -->
+            <div class="fab-menu-items hidden" id="edit-menu-items">
+                <button class="fab-menu-btn" data-nav="bg-picker" title="Change Background">🖼️
+                    <span>Background</span></button>
+                <button class="fab-menu-btn" data-nav="radio-picker" title="Customize Radio">📻
+                    <span>Radio</span></button>
+                <button class="fab-menu-btn" data-nav="frame-picker" title="Change Frame">🖼️
+                    <span>Frame</span></button>
+                <button class="fab-menu-btn" data-nav="shelf-picker" title="Customize Shelf">📚
+                    <span>Shelf</span></button>
+            </div>
+
+            <!-- Share button (secondary FAB) -->
+            <button class="fab-btn" id="btn-share" title="Share room">🔗</button>
+            <!-- Toggle button (primary FAB) -->
+            <button class="fab-btn primary" id="btn-edit-toggle" title="Customize Room">✎</button>
+        </div>
+
+        <!-- Branding -->
+        <div class="room-branding" id="room-branding">
+            <div class="branding-title">HearMe</div>
+            <div class="branding-tagline">Sound is Personal</div>
+        </div>
+
+        <!-- Profile corkboard (top-right) — with selectable frame -->
+        <div class="profile-board" id="profile-board">
+            <img class="profile-frame-img" id="profile-frame-img" src="./photos/frames/Group 27.png"
+                alt="Profile frame" />
+            <div class="profile-board-inner">
+                <div class="profile-fields">
+                    <div class="profile-field pinned" id="profile-name-display" data-profile-field="name"
+                        data-placeholder="Name">Name</div>
+                    <div class="profile-field pinned" id="profile-genre-display" data-profile-field="genre"
+                        data-placeholder="Favourite genre">Favourite genre</div>
+                    <div class="profile-field pinned bio-field" id="profile-bio-display" data-profile-field="bio"
+                        data-placeholder="Bio">Bio</div>
+                </div>
+                <div class="profile-photo-slot" id="profile-photo-btn" title="Upload photo">
+                    📷<br>Profile<br>photo
+                </div>
+                <input type="file" id="profile-photo-input" accept="image/*" hidden />
+            </div>
+            <button class="btn-change-frame" id="btn-change-frame" title="Change frame">🖼️</button>
+        </div>
+
+        <!-- Custom CSS Boombox with integrated controls -->
+        <div class="boombox-wrapper" id="boombox">
+            <!-- Handle -->
+            <div class="boombox-handle" id="boombox-handle">
+                <div class="handle-bar"></div>
+            </div>
+            <!-- Main body -->
+            <div class="boombox-body" id="boombox-body">
+                <!-- Left speaker -->
+                <div class="boombox-speaker left" id="boombox-speaker-left">
+                    <div class="speaker-cone"></div>
+                    <div class="speaker-ring"></div>
+                    <div class="speaker-dot"></div>
+                </div>
+                <!-- Center section -->
+                <div class="boombox-center">
+                    <!-- LCD Screen -->
+                    <div class="boombox-screen" id="boombox-screen">
+                        <div class="screen-song" id="now-playing-song">No song playing</div>
+                        <div class="screen-artist" id="now-playing-artist"></div>
+                    </div>
+                    <!-- Controls -->
+                    <div class="boombox-controls">
+                        <button class="boombox-ctrl-btn" id="btn-prev" title="Previous">⏮</button>
+                        <button class="boombox-ctrl-btn play" id="btn-play-pause" title="Play / Pause">▶</button>
+                        <button class="boombox-ctrl-btn" id="btn-next" title="Next">⏭</button>
+                    </div>
+                </div>
+                <!-- Right speaker -->
+                <div class="boombox-speaker right" id="boombox-speaker-right">
+                    <div class="speaker-cone"></div>
+                    <div class="speaker-ring"></div>
+                    <div class="speaker-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shelf with playlist spines — CSS drawn -->
+        <div class="shelf-wrapper">
+            <div class="shelf">
+                <div class="shelf-top-bay">
+                    <div class="playlist-spines" id="playlist-spines">
+                        <!-- Spines rendered by JS -->
+                    </div>
+                </div>
+                <div class="shelf-plank"></div>
+                <div class="shelf-bottom-bay"></div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: WIZARD STEP 1 — Name your playlist
+══════════════════════════════════════════════════════════ -->
+    <section id="page-playlist-name" class="wizard-layout" hidden>
+        <aside class="wizard-sidebar">
+            <div class="sidebar-label" id="wizard-sidebar-label">New Playlist</div>
+        </aside>
+        <main class="wizard-body">
+            <h2 class="wizard-title text-shadow">Give your playlist a name</h2>
+            <div class="name-input-wrapper">
+                <input id="input-playlist-name" type="text" maxlength="24" placeholder="Playlist #1"
+                    autocomplete="off" />
+            </div>
+            <button class="btn-next" id="btn-name-next">Next</button>
+        </main>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: WIZARD STEP 2 — Choose a colour
+══════════════════════════════════════════════════════════ -->
+    <section id="page-playlist-color" class="wizard-layout" hidden>
+        <aside class="wizard-sidebar">
+            <div class="sidebar-label" id="wizard-color-label">New Playlist</div>
+        </aside>
+        <main class="wizard-body">
+            <h2 class="wizard-title text-shadow">Give your playlist a color</h2>
+            <div class="color-grid" id="playlist-color-grid">
+                <!-- swatches injected by JS -->
+            </div>
+            <button class="btn-next" id="btn-color-next">Next</button>
+        </main>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: WIZARD STEP 3 — Add songs
+══════════════════════════════════════════════════════════ -->
+    <section id="page-playlist-songs" class="wizard-layout" hidden>
+        <aside class="wizard-sidebar">
+            <div class="sidebar-label" id="wizard-songs-label">New Playlist</div>
+        </aside>
+        <main class="wizard-body" style="justify-content:flex-start; padding-top:2rem;">
+            <div class="songs-layout">
+                <!-- LEFT: search + results -->
+                <div class="search-area">
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input id="song-search-input" type="text" placeholder="Search song / artist name"
+                            autocomplete="off" />
+                    </div>
+                    <div class="song-list" id="song-search-results">
+                        <!-- results injected by JS -->
+                    </div>
+                </div>
+                <!-- RIGHT: edit panel -->
+                <div class="edit-panel">
+                    <h3>Edit playlist</h3>
+                    <div class="edit-list" id="edit-playlist-list">
+                        <!-- added songs injected by JS -->
+                    </div>
+                </div>
+            </div>
+            <button class="btn-next" id="btn-songs-done">Done</button>
+        </main>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: BACKGROUND PICKER
+══════════════════════════════════════════════════════════ -->
+    <section id="page-bg-picker" hidden>
+        <div class="bg-picker-body">
+            <h2>Choose a background color</h2>
+            <div class="color-grid" id="bg-color-grid">
+                <!-- swatches injected by JS -->
+            </div>
+            <p class="or-text">or<br>Upload a background image</p>
+            <label class="upload-area" for="bg-image-input" title="Upload background image">☁️</label>
+            <input type="file" id="bg-image-input" accept="image/*" hidden />
+            <button class="btn-next" data-nav="room" style="position:static; margin-top:1rem;">← Back to Room</button>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: RADIO COLOR CUSTOMIZER
+══════════════════════════════════════════════════════════ -->
+    <section id="page-radio-picker" hidden>
+        <div class="picker-body">
+            <h2>Customize your radio</h2>
+            <div class="radio-color-customizer" id="radio-color-customizer">
+                <div class="color-option">
+                    <label for="radio-color-body">🎨 Body</label>
+                    <input type="color" id="radio-color-body" value="#e74c3c" />
+                </div>
+                <div class="color-option">
+                    <label for="radio-color-speaker">🔊 Speakers</label>
+                    <input type="color" id="radio-color-speaker" value="#2c3e50" />
+                </div>
+                <div class="color-option">
+                    <label for="radio-color-handle">🪩 Handle</label>
+                    <input type="color" id="radio-color-handle" value="#7f8c8d" />
+                </div>
+                <div class="color-option">
+                    <label for="radio-color-buttons">▶ Buttons</label>
+                    <input type="color" id="radio-color-buttons" value="#f39c12" />
+                </div>
+                <div class="color-option">
+                    <label for="radio-color-detail">✨ Details</label>
+                    <input type="color" id="radio-color-detail" value="#ecf0f1" />
+                </div>
+            </div>
+            <div class="radio-presets">
+                <p style="font-size:0.8rem; color:#888; margin-bottom:0.5rem;">Quick presets:</p>
+                <div class="preset-row" id="radio-presets">
+                    <!-- injected by JS -->
+                </div>
+            </div>
+            <button class="btn-next" data-nav="room" style="position:static; margin-top:1.5rem;">← Back to Room</button>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: SHELF CUSTOMIZER
+══════════════════════════════════════════════════════════ -->
+    <section id="page-shelf-picker" hidden>
+        <div class="picker-body">
+            <h2>Customize your shelf</h2>
+            <div class="radio-color-customizer">
+                <div class="color-option">
+                    <label for="shelf-color-main">📚 Main Wood</label>
+                    <input type="color" id="shelf-color-main" value="#b5813b" />
+                </div>
+            </div>
+            <button class="btn-next" data-nav="room" style="position:static; margin-top:1.5rem;">← Back to Room</button>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE: FRAME PICKER
+══════════════════════════════════════════════════════════ -->
+    <section id="page-frame-picker" hidden>
+        <div class="picker-body">
+            <h2>Choose your frame</h2>
+            <div class="picker-grid frame-picker-grid" id="frame-picker-grid">
+                <!-- frame images injected by JS -->
+            </div>
+            <button class="btn-next" data-nav="room" style="position:static; margin-top:1.5rem;">← Back to
+                Room</button>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+     SHARE MODAL (toast overlay)
+══════════════════════════════════════════════════════════ -->
+    <div class="share-modal" id="share-modal" hidden>
+        <div class="share-modal-content">
+            <h3>Share your room</h3>
+            <p class="share-desc">Copy this link to share your room with friends!</p>
+            <div class="share-url-box">
+                <input type="text" id="share-url-input" readonly />
+                <button id="btn-copy-share" title="Copy URL">📋 Copy</button>
+            </div>
+            <button class="btn-close-share" id="btn-close-share">Close</button>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PLAYLIST VIEWER MODAL
+══════════════════════════════════════════════════════════ -->
+    <div class="playlist-viewer" id="playlist-viewer" hidden>
+        <div class="playlist-viewer-content">
+            <div class="playlist-viewer-header">
+                <h3 id="playlist-viewer-title">Playlist</h3>
+                <button class="btn-close-viewer" id="btn-close-viewer">✕</button>
+            </div>
+            <div class="playlist-viewer-songs" id="playlist-viewer-songs">
+                <!-- songs injected by JS -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="module" src="./js/app.js"></script>
+
 </body>
+
 </html>
